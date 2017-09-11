@@ -7,8 +7,9 @@ import lombok.Setter;
 import java.util.List;
 
 @Data
-public class Department {
-    private String name;
-    private String code;
-    private List<Employee> employees;
+public class Account {
+
+    private String number;
+    private Long balance;
+    private List<Transaction> transactions;
 }

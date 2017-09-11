@@ -1,6 +1,9 @@
 package com.github.vlshat.stepic.streams;
 
+import com.github.vlshat.stepic.streams.entitites.Account;
 import com.github.vlshat.stepic.streams.entitites.Department;
+import com.github.vlshat.stepic.streams.entitites.State;
+import com.github.vlshat.stepic.streams.entitites.Transaction;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -51,6 +54,18 @@ public class Problems {
                 .flatMap(department -> department.getEmployees().stream())
                 .filter(employee -> employee.getSalary() >= threshold)
                 .count();
+    }
+
+    /**
+     * Calculates the general sum of canceled transactions for all non empty accounts in the list
+     */
+    public static long calcSumOfCanceledTransOnNonEmptyAccounts(List<Account> accounts) {
+        return accounts.stream()
+                .filter(a -> a.getBalance() > 0)
+                .flatMap(a -> a.getTransactions().stream())
+                .filter(t -> t.getState() == State.canceled)
+                .map(Transaction::getSum)
+                .reduce(0L, Long::sum);
     }
 
 }
