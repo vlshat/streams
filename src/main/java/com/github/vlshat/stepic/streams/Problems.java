@@ -68,4 +68,8 @@ public class Problems {
                 .reduce(0L, Long::sum);
     }
 
+    public static long collectorExample(List<Integer> numbers) {
+        return numbers.stream().reduce(1, (acc, number) -> acc * number * number);
+    }
+
 }
