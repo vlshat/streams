@@ -1,5 +1,7 @@
 package com.github.vlshat.stepic.streams;
 
+import com.github.vlshat.stepic.streams.entitites.Department;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -34,4 +36,21 @@ public class Problems {
         return LongStream.rangeClosed(start, end)
                 .reduce(0, (acc, number) -> number % 2 != 0 ? acc + number : acc);
     }
+
+    /**
+     * Calculates the number of employees with salary >= threshold (only for 111- departments)
+     *
+     * @param departments are list of departments
+     * @param threshold is lower edge of salary
+     *
+     * @return the number of employees
+     */
+    public static long calcNumberOfEmployees(List<Department> departments, long threshold) {
+        return departments.stream()
+                .filter(department -> department.getCode().startsWith("111-"))
+                .flatMap(department -> department.getEmployees().stream())
+                .filter(employee -> employee.getSalary() >= threshold)
+                .count();
+    }
+
 }
