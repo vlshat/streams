@@ -26,6 +26,12 @@ public class Problems {
 
     public static long factorial(long n) {
         return LongStream.rangeClosed(0, n)
-                .reduce(0, (acc, number) -> acc == 1 || acc == 0 ? acc = 1 : acc + 1);
+                .reduce(0, (acc, number) -> number == 1
+                        || number == 0 ? acc = 1 : acc * number);
+    }
+
+    public static long sumOfOddNumbersInRange(long start, long end) {
+        return LongStream.rangeClosed(start, end)
+                .reduce(0, (acc, number) -> number % 2 != 0 ? acc + number : acc);
     }
 }
