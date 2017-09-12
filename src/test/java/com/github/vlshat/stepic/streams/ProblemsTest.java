@@ -80,4 +80,11 @@ public class ProblemsTest {
         assertThat(clickCount.get("url1"), is(2L));
         assertThat(clickCount.get("url2"), is(1L));
     }
+
+    @Test
+    public void isPrime() throws Exception {
+        assertThat(Problems.isPrime(2), is(true));
+        assertThat(Problems.isPrime(3), is(true));
+        assertThat(Problems.isPrime(4), is(false));
+    }
 }

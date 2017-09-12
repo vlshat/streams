@@ -57,6 +57,16 @@ public class Problems {
                         || number == 0 ? acc = 1 : acc * number);
     }
 
+    /**
+     * Checking if a number is prime
+     *
+     * @param number to test >= 2
+     * @return true if number is prime else false
+     */
+    public static boolean isPrime(final long number) {
+        return LongStream.rangeClosed(1, number).filter(n -> number % n == 0).count() <= 2;
+    }
+
     public static long sumOfOddNumbersInRange(long start, long end) {
         return LongStream.rangeClosed(start, end)
                 .reduce(0, (acc, number) -> number % 2 != 0 ? acc + number : acc);
