@@ -1,6 +1,7 @@
 package com.github.vlshat.stepic.streams;
 
 import com.github.vlshat.stepic.streams.entitites.AccountCollector;
+import com.github.vlshat.stepic.streams.entitites.LogEntry;
 import com.github.vlshat.stepic.streams.entitites.TransactionCollector;
 import org.junit.Test;
 
@@ -65,5 +66,18 @@ public class ProblemsTest {
         final Map<String, Long> resultMap = Problems.totalSumOfTransByEachAccount(transactions);
         assertThat(resultMap.get(acc1.getNumber()), is(21L));
         assertThat(resultMap.get(acc2.getNumber()), is(15L));
+    }
+
+    @Test
+    public void clickCountTest() throws Exception {
+        final List<LogEntry> logs = new ArrayList<>();
+        logs.add(new LogEntry("nagibator", "url1"));
+        logs.add(new LogEntry("wasa", "url2"));
+        logs.add(new LogEntry("qq", "url1"));
+
+        final Map<String, Long> clickCount = Problems.clickCount(logs);
+
+        assertThat(clickCount.get("url1"), is(2L));
+        assertThat(clickCount.get("url2"), is(1L));
     }
 }

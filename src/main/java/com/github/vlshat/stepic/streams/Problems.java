@@ -2,13 +2,16 @@ package com.github.vlshat.stepic.streams;
 
 import com.github.vlshat.stepic.streams.entitites.Account;
 import com.github.vlshat.stepic.streams.entitites.Department;
+import com.github.vlshat.stepic.streams.entitites.LogEntry;
 import com.github.vlshat.stepic.streams.entitites.State;
 import com.github.vlshat.stepic.streams.entitites.Transaction;
 import com.github.vlshat.stepic.streams.entitites.TransactionCollector;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
@@ -17,6 +20,22 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.summingLong;
 
 public class Problems {
+
+    /**
+     * The method represents a disjunct operator for a list of predicates.
+     * For an empty list it returns the always false predicate.
+     */
+    public static IntPredicate disjunctAll(List<IntPredicate> predicates) {
+        IntPredicate intPredicate = p -> false;
+
+        if(!predicates.isEmpty()){
+            for (IntPredicate predicate : predicates) {
+                intPredicate = intPredicate.or(predicate);
+            }
+        }
+
+        return intPredicate;
+    }
 
     public static Stream<String> createBadWordsDetectingStream(String text, List<String> badWords) {
         return Arrays.stream(text.split(" "))
@@ -86,6 +105,10 @@ public class Problems {
                         t -> t.getAccount().getNumber(),
                         summingLong(TransactionCollector::getSum)
                         ));
+    }
+
+    public static Map<String, Long> clickCount(List<LogEntry> logs) {
+        return new HashMap<>();
     }
 
 }
