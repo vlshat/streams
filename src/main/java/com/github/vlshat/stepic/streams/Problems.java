@@ -4,6 +4,7 @@ import com.github.vlshat.stepic.streams.entitites.Account;
 import com.github.vlshat.stepic.streams.entitites.Department;
 import com.github.vlshat.stepic.streams.entitites.State;
 import com.github.vlshat.stepic.streams.entitites.Transaction;
+import com.github.vlshat.stepic.streams.entitites.TransactionCollector;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.summingLong;
 
 public class Problems {
 
@@ -75,6 +78,14 @@ public class Problems {
     public static Map<Boolean, List<String>> palindromeOrNot(String[] words) {
         return Arrays.stream(words).collect(Collectors.partitioningBy(word ->
                 word.equals(new StringBuilder(word).reverse().toString())));
+    }
+
+    public static Map<String, Long> totalSumOfTransByEachAccount(List<TransactionCollector> transactions) {
+        return transactions.stream()
+                .collect(Collectors.groupingBy(
+                        t -> t.getAccount().getNumber(),
+                        summingLong(TransactionCollector::getSum)
+                        ));
     }
 
 }

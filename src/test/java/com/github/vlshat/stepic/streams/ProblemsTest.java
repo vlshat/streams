@@ -1,9 +1,12 @@
 package com.github.vlshat.stepic.streams;
 
+import com.github.vlshat.stepic.streams.entitites.AccountCollector;
+import com.github.vlshat.stepic.streams.entitites.TransactionCollector;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -45,5 +48,22 @@ public class ProblemsTest {
         assertThat(Problems.palindromeOrNot(input1).get(Boolean.TRUE).contains("aaaa"), is(true));
         assertThat(Problems.palindromeOrNot(input2).get(Boolean.FALSE).contains("bbaa"), is(true));
 
+    }
+
+    @Test
+    public void totalSumOfTransByEachAccount() throws Exception {
+        final AccountCollector acc1 = new AccountCollector("1", 1000L);
+        acc1.setBalance(1000L);
+        acc1.setNumber("1");
+        final AccountCollector acc2 = new AccountCollector("2", 2000L);
+
+        final List<TransactionCollector> transactions = new ArrayList<>();
+        transactions.add(new TransactionCollector(10L, acc1));
+        transactions.add(new TransactionCollector(11L, acc1));
+        transactions.add(new TransactionCollector(15L, acc2));
+
+        final Map<String, Long> resultMap = Problems.totalSumOfTransByEachAccount(transactions);
+        assertThat(resultMap.get(acc1.getNumber()), is(21L));
+        assertThat(resultMap.get(acc2.getNumber()), is(15L));
     }
 }
