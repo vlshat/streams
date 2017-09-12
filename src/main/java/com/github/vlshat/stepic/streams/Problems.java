@@ -6,8 +6,8 @@ import com.github.vlshat.stepic.streams.entitites.State;
 import com.github.vlshat.stepic.streams.entitites.Transaction;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
@@ -70,6 +70,11 @@ public class Problems {
 
     public static long collectorExample(List<Integer> numbers) {
         return numbers.stream().reduce(1, (acc, number) -> acc * number * number);
+    }
+
+    public static Map<Boolean, List<String>> palindromeOrNot(String[] words) {
+        return Arrays.stream(words).collect(Collectors.partitioningBy(word ->
+                word.equals(new StringBuilder(word).reverse().toString())));
     }
 
 }

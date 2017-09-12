@@ -1,16 +1,12 @@
 package com.github.vlshat.stepic.streams;
 
-import com.github.vlshat.stepic.streams.entitites.Account;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class ProblemsTest {
     @Test
@@ -41,4 +37,13 @@ public class ProblemsTest {
         assertThat(Problems.sumOfOddNumbersInRange(21, 30), is(125L));
     }
 
+    @Test
+    public void palindromeOrNot() throws Exception {
+        final String[] input1 = {"aaaa", "aaa", "a", "aa"};
+        final String[] input2 = {"level", "bbaa", "ac"};
+
+        assertThat(Problems.palindromeOrNot(input1).get(Boolean.TRUE).contains("aaaa"), is(true));
+        assertThat(Problems.palindromeOrNot(input2).get(Boolean.FALSE).contains("bbaa"), is(true));
+
+    }
 }
