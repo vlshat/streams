@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -121,4 +122,18 @@ public class Problems {
         return new HashMap<>();
     }
 
+    public static LongStream createPrimesFilteringStream(long rangeBegin, long rangeEnd) {
+        return LongStream.rangeClosed(rangeBegin, rangeEnd).parallel().filter(Problems::isPrime);
+    }
+
+    public static Function<Integer, Function<Integer, Function<Integer, Integer>>> curriedFunction() {
+        return x -> y -> z -> x + y * y + z * z * z;
+    }
+
+    public static Function< String, Function<String, Function<String, Function<String, String>>>> stringConverter() {
+        return fst -> snd -> trd -> frt -> fst.toLowerCase()
+                .concat(trd.toUpperCase())
+                .concat(snd.toLowerCase())
+                .concat(frt.toUpperCase());
+    }
 }

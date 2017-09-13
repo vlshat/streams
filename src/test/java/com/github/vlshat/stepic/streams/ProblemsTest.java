@@ -87,4 +87,24 @@ public class ProblemsTest {
         assertThat(Problems.isPrime(3), is(true));
         assertThat(Problems.isPrime(4), is(false));
     }
+
+    @Test
+    public void curriedFunctionTest() throws Exception {
+        assertThat(Problems.curriedFunction().apply(1).apply(1).apply(1), is(3));
+        assertThat(Problems.curriedFunction().apply(2).apply(3).apply(4), is(75));
+    }
+
+    @Test
+    public void stringConverterTest() throws Exception {
+        assertThat(Problems.stringConverter()
+                .apply("aa")
+                .apply("bb")
+                .apply("cc")
+                .apply("dd"), is("aaCCbbDD"));
+        assertThat(Problems.stringConverter()
+                .apply("AAA")
+                .apply("bbb")
+                .apply("CCC")
+                .apply("ddd"), is("aaaCCCbbbDDD"));
+    }
 }
